@@ -6,6 +6,7 @@ import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import MainHeader from './components/MainHeader/MainHeader';
 import AuthContext from './store/auth-context';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -34,12 +35,18 @@ function App() {
          isLoggedIn:isLoggedIn,
           onLogout:logoutHandler
       }}>
-        <MainHeader/>
-        <main>
-          {!isLoggedIn && <Login onLogin={loginHandler} />}
-          {isLoggedIn && <Home onLogout={logoutHandler} />}
-        </main>
-      </AuthContext.Provider>
+      <div className="d-flex flex-column vh-100 overflow-hidden">
+              
+              <MainHeader />
+              <main className="flex-grow-1">
+                {!isLoggedIn && <Login onLogin={loginHandler} />}
+                {isLoggedIn && <Home onLogout={logoutHandler} />}
+              </main>
+
+              <Footer />
+
+            </div>
+    </AuthContext.Provider>
   );
 }
 

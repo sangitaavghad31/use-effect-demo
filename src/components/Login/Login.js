@@ -72,45 +72,66 @@ const Login = (props) => {
     props.onLogin(emailState.value, passwordState.value);
   };
 
-  return (
-    <Card className={classes.login}>
+ return (
+  <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
+    <Card className="p-4 shadow" style={{ width: "400px" }}>
       <form onSubmit={submitHandler}>
-        <div
-          className={`${classes.control} ${
-            emailState.isValid === false ? classes.invalid : ""
-          }`}
-        >
-          <label htmlFor="email">E-Mail</label>
+        
+        {/* Email */}
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">E-Mail</label>
           <input
             type="email"
             id="email"
+            className={`form-control ${
+              emailState.isValid === false ? "is-invalid" : ""
+            }`}
             value={emailState.value}
             onChange={emailChangeHandler}
             onBlur={validateEmailHandler}
           />
+          {emailState.isValid === false && (
+            <div className="invalid-feedback">
+              Please enter a valid email.
+            </div>
+          )}
         </div>
-        <div
-          className={`${classes.control} ${
-            passwordState.isValid === false ? classes.invalid : ""
-          }`}
-        >
-          <label htmlFor="password">Password</label>
+
+        {/* Password */}
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">Password</label>
           <input
             type="password"
             id="password"
+            className={`form-control ${
+              passwordState.isValid === false ? "is-invalid" : ""
+            }`}
             value={passwordState.value}
             onChange={passwordChangeHandler}
             onBlur={validatePasswordHandler}
           />
+          {passwordState.isValid === false && (
+            <div className="invalid-feedback">
+              Password must be more than 6 characters.
+            </div>
+          )}
         </div>
-        <div className={classes.actions}>
-          <Button type="submit" className={classes.btn} disabled={!formIsValid}>
+
+        {/* Button */}
+        <div className="d-grid">
+          <Button
+            type="submit"
+            className="btn btn-primary"
+            disabled={!formIsValid}
+          >
             Login
           </Button>
         </div>
+
       </form>
     </Card>
-  );
-};
+  </div>
+);
+}
 
 export default Login;
